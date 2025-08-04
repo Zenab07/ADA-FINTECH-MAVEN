@@ -160,6 +160,30 @@ public class UserAccountDao {
             throw new RuntimeException("Erreur lors de la récupération de l'utilisateur", e);
         }
     }
+
+    public UserAccount findById(Long id) {
+        String query = "SELECT * FROM Useraccount WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/MY_DB", "root", "admin");
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                UserAccount user = new UserAccount();
+                user.setId(rs.getLong("id"));
+                user.setLogin(rs.getString("login"));
+                user.setPassword(rs.getString("password"));
+                user.setCompteType(CompteType.valueOf(rs.getString("comptetype")));
+                return user;
+            }
+            return null; // aucun user trouvé
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération du UserAccount par ID", e);
+        }
+    }
+
 }
 
 

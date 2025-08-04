@@ -39,6 +39,7 @@ public class App {
             System.out.println("\t##########################################");
             System.out.println("\t# 1. Inscription                         #");
             System.out.println("\t# 2. Connexion                           #");
+            System.out.println("\t# 3. Importer données ODS                #");
             System.out.println("\t# 0. Quitter                             #");
             System.out.println("\t##########################################");
             System.out.print("Votre choix : ");
