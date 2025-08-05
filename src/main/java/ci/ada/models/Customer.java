@@ -8,7 +8,6 @@ public class Customer extends User{
     private Gender gender;
 
 
-
     public Customer(String lastName, String firstName, String phone, String email, Gender gender, UserAccount userAccount, Wallet wallet, String profilePage) {
         super(lastName, firstName, phone, email, userAccount, profilePage, wallet);
         this.gender = gender;
@@ -25,4 +24,5 @@ public class Customer extends User{
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
 }

@@ -1,5 +1,7 @@
 package ci.ada.models;
 
+import java.util.concurrent.BlockingQueue;
+
 public class User extends BasicInfo{
 
     private String profilePage;
@@ -7,10 +9,10 @@ public class User extends BasicInfo{
     private Wallet wallet;
 
 
-    public User(String lastName, String firstName, String phone, String email, UserAccount userAccount, String profilePage, Wallet wallet) {
-        super(lastName, firstName, phone, email, userAccount);
-        this.profilePage = profilePage;
-        this.wallet = wallet;
+    public User(Builder<?> builder) {
+        super(builder);
+        this.profilePage = builder.profilePage;
+        this.wallet = builder.wallet;
     }
 
     public User() {
@@ -31,5 +33,32 @@ public class User extends BasicInfo{
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+
+    public abstract static class Builder <T extends Builder<T>> extends BasicInfo.Builder<T>{
+        protected String profilePage;
+        private Wallet wallet;
+
+        public abstract T self();
+
+        public T profilePage(String profilePage) {
+            this.profilePage = profilePage;
+            return self();
+        }
+
+        public T wallet(Wallet wallet){
+            this.wallet = wallet;
+            return self();
+        }
+    }
+
+    public static class UserBuilder extends Builder<UserBuilder>{
+
+
+        @Override
+        public UserBuilder self() {
+            return this;
+        }
     }
 }
